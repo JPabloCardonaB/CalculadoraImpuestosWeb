@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Result</title>
+</head>
+<body>
+
+    <!-- <link rel="stylesheet" href="{{ url_for('static',filename='styles/result_tax.css') }}"> -->
+
+    <header>
+        <center>
+            <b>
+                <h1>
+                    RESULTADOS CALCULADORA
+                </h1>
+            </b>
+        </center>
+    </header>
+
+    <section>
+
+        <form action="index.php" method="POST">
+
+                <label for="salario_graval"> Total de otros ingresos gravables por año: </label>
+
+                <br>
+
+                <label for="salario_no_graval"> Total de otros ingresos no gravables por año: </label>
+
+                <br>
+
+                <label for = "costos_totales"> Costos totales deducibles: </label>
+
+                <br>
+
+                <label for="ingresos_de_renta"> Cantidad a pagar ingresos de renta: </label>
+
+                <br>
+                    <div>
+                        <input type="submit" value="Guardar">
+
+                        <input type="submit" value="Regresar">
+
+                    </div>
+    </section>
+
+</body>
+</html>
