@@ -2,8 +2,8 @@
 
 ## ¿Quién hizo esto? (Autores)
 
-- Valentina Carmona Guzmán.
-- Luis Pablo Goez.
+- Juan Pablo Cardona Bedoya.
+- Sebastián Tamayo.
 
 ## ¿Qué es y para qué es?
 
