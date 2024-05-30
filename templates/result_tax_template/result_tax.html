@@ -23,23 +23,23 @@
 
         <form action="/">
 
-                <label for="salario_graval"> Total de otros ingresos gravables por año: </label>
+                <label for="salario_graval"> Total de otros ingresos gravables por año: {{ tax[0] }}</label>
 
                 <br>
 
-                <label for="salario_no_graval"> Total de otros ingresos no gravables por año: </label>
+                <label for="salario_no_graval"> Total de otros ingresos no gravables por año: {{ tax[1] }}</label>
 
                 <br>
 
-                <label for = "costos_totales"> Costos totales deducibles: </label>
+                <label for = "costos_totales"> Costos totales deducibles: {{ tax[2] }}</label>
 
                 <br>
 
-                <label for="ingresos_de_renta"> Cantidad a pagar ingresos de renta: </label>
+                <label for="ingresos_de_renta"> Cantidad a pagar ingresos de renta: {{ tax[3] }}</label>
 
                 <br>
                     <div>
-                        <input type="submit" value="Guardar">
+                        <!-- <input type="submit" value="Guardar"> -->
 
                         <input type="submit" value="Regresar">
 

@@ -10,7 +10,7 @@
         // Función para verificar si todos los campos están llenos
         function validarCampos() {
             var campos = document.querySelectorAll('input[type="number"]');
-            var botonGuardar = document.querySelector('.buttons button');
+            var botonGuardar = document.getElementById('guardarButton');
 
             var todosLlenos = true;
             campos.forEach(function(campo) {
@@ -22,9 +22,54 @@
             // Habilitar o deshabilitar el botón según el estado de los campos
             botonGuardar.disabled = !todosLlenos;
         }
+
+        // Añadir el evento 'DOMContentLoaded' para asegurar que el DOM esté completamente cargado antes de añadir los event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            var campos = document.querySelectorAll('input[type="number"]');
+            campos.forEach(function(campo) {
+                campo.addEventListener('input', validarCampos);
+            });
+        });
+
+        function obtenerValores() {
+            // Obtenemos los valores de cada input por su id
+            const cedula = document.getElementById('DNI').value;
+            const salario = document.getElementById('annual_labor_income').value;
+            const salarioGravable = document.getElementById('annual_graval_salary').value;
+            const salarioNoGravable = document.getElementById('annual_no_graval_salary').value;
+            const retencionFuente = document.getElementById('annual_withholding_tax').value;
+            const pagoHipotecario = document.getElementById('annual_mortgage_loan_payment').value;
+            const donaciones = document.getElementById('annual_donations').value;
+            const gastosEducacion = document.getElementById('annual_education_expenses').value;
+
+            // Creamos un objeto con los valores obtenidos
+            const valores = {
+                cedula,
+                salario,
+                salarioGravable,
+                salarioNoGravable,
+                retencionFuente,
+                pagoHipotecario,
+                donaciones,
+                gastosEducacion
+            };
+
+            // Mostrar los valores en la consola (puedes cambiar esto para hacer otra cosa con los valores)
+            console.log(valores);
+
+            return valores;
+        }
+
+        function abrirDialogoGuardar(event) {
+            event.preventDefault();  // Prevenir el comportamiento predeterminado del botón
+            const valores_obtenidos = obtenerValores()
+            document.getElementById('PopupGuardar').showModal();
+        }
+      
+        function cerrarDialogoGuardar() {
+            document.getElementById('PopupGuardar').close();
+        }
     </script>
-
-
 </head>
 <body>
     <header>
@@ -40,50 +85,39 @@
             <h2>Ingrese los datos</h2>
 
             <label for="cedula">Cédula / Documento de Identidad: </label>
-            <input type="number" name="cedula" id="DNI" required oninput="validarCampos()">
+            <input type="number" name="cedula" id="DNI" required>
 
             <label for="salario">Total de ingresos laborales por año: </label>
-            <input type="number" name="salary" id="annual_labor_income" required oninput="validarCampos()">
+            <input type="number" name="salary" id="annual_labor_income" required>
 
             <label for="salario_graval"> Total de otros ingresos gravables por año: </label>
-            <input type="number" name="graval_salary" id="annual_graval_salary" required oninput="validarCampos()">
+            <input type="number" name="graval_salary" id="annual_graval_salary" required>
 
             <label for="salario_no_graval"> Total de otros ingresos no gravables por año: </label>
-            <input type="number" name="no_graval_salary" id="annual_no_graval_salary" required oninput="validarCampos()">
+            <input type="number" name="no_graval_salary" id="annual_no_graval_salary" required>
 
             <label for="Withholding tax"> Valor de retención en la fuente por año: </label>
-            <input type="number" name="withholding_tax" id="annual_withholding_tax" required oninput="validarCampos()">
+            <input type="number" name="withholding_tax" id="annual_withholding_tax" required>
 
             <label for="mortgage loan payment"> Valor de pago de crédito hipotecario por año: </label>
-            <input type="number" name="mortgage_loan_payment" id="annual_mortgage_loan_payment" required oninput="validarCampos()">
+            <input type="number" name="mortgage_loan_payment" id="annual_mortgage_loan_payment" required>
 
             <label for="donations"> Valor de donaciones por año: </label>
-            <input type="number" name="donations" id="annual_donations" required oninput="validarCampos()">
+            <input type="number" name="donations" id="annual_donations" required>
 
             <label for="education expenses"> Valor de gastos en educacion por año: </label>
-            <input type="number" name="education_expenses" id="annual_education_expenses" required oninput="validarCampos()">
+            <input type="number" name="education_expenses" id="annual_education_expenses" required>
 
             <div class="buttons">
-                <input type="submit" value="Calcular" onclick="setFormAction('/result_tax')">
+                <input type="submit" value="Calcular">
                 <input type="reset" value="Limpiar">
-                <button onclick="abrirDialogo()">Guardar</button>
+                <button id="guardarButton" onclick="abrirDialogoGuardar(event)" disabled>Guardar</button>
 
-                <dialog id="miDialogo">
-                  <h2>Título del Popup</h2>
-                  <p>Contenido del popup...</p>
-                  <button onclick="cerrarDialogo()">Cerrar</button>
+                <dialog id="PopupGuardar">
+                    <h2>Guardado Exitoso</h2>
+                    <br>
+                    <button onclick="cerrarDialogoGuardar()">Cerrar</button>
                 </dialog>
-              
-                <script>
-                  function abrirDialogo() {
-                    document.getElementById('miDialogo').showModal();
-                  }
-              
-                  function cerrarDialogo() {
-                    document.getElementById('miDialogo').close();
-                  }
-                </script>
-
             </div>
         </form>
 
@@ -93,9 +127,10 @@
             <input type="number" name="cedula" id="DNI" required>
             <div class="buttons">
                 <input type="submit" value="Buscar">
-            </div>
-        </form>
 
+                <input type="submit" value="Eliminar">
+            </div>
+            
+        </form>
+        
     </section>
-</body>
-</html>
