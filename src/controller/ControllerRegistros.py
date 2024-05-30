@@ -4,7 +4,7 @@ sys.path.append("src")
 from model.TaxLogic import TaxInformation
 
 import psycopg2
-from controller import SecretConfig
+import SecretConfig
 
 class ErrorNotFound( Exception ):
     """ Excepcion que indica que una fila buscada no fue encontrada"""

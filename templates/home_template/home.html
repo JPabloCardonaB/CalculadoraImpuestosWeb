@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_home.css') }}">
+
+    <script>
+        // Función para verificar si todos los campos están llenos
+        function validarCampos() {
+            var campos = document.querySelectorAll('input[type="number"]');
+            var botonGuardar = document.querySelector('.buttons button');
+
+            var todosLlenos = true;
+            campos.forEach(function(campo) {
+                if (campo.value === '') {
+                    todosLlenos = false;
+                }
+            });
+
+            // Habilitar o deshabilitar el botón según el estado de los campos
+            botonGuardar.disabled = !todosLlenos;
+        }
+    </script>
+
+
+</head>
+<body>
+    <header>
+        <center>
+            <b>
+                <h1>CALCULADORA DE IMPUESTOS</h1>
+            </b>
+        </center>
+    </header>
+
+    <section>
+        <form action="/result_tax">
+            <h2>Ingrese los datos</h2>
+
+            <label for="cedula">Cédula / Documento de Identidad: </label>
+            <input type="number" name="cedula" id="DNI" required oninput="validarCampos()">
+
+            <label for="salario">Total de ingresos laborales por año: </label>
+            <input type="number" name="salary" id="annual_labor_income" required oninput="validarCampos()">
+
+            <label for="salario_graval"> Total de otros ingresos gravables por año: </label>
+            <input type="number" name="graval_salary" id="annual_graval_salary" required oninput="validarCampos()">
+
+            <label for="salario_no_graval"> Total de otros ingresos no gravables por año: </label>
+            <input type="number" name="no_graval_salary" id="annual_no_graval_salary" required oninput="validarCampos()">
+
+            <label for="Withholding tax"> Valor de retención en la fuente por año: </label>
+            <input type="number" name="withholding_tax" id="annual_withholding_tax" required oninput="validarCampos()">
+
+            <label for="mortgage loan payment"> Valor de pago de crédito hipotecario por año: </label>
+            <input type="number" name="mortgage_loan_payment" id="annual_mortgage_loan_payment" required oninput="validarCampos()">
+
+            <label for="donations"> Valor de donaciones por año: </label>
+            <input type="number" name="donations" id="annual_donations" required oninput="validarCampos()">
+
+            <label for="education expenses"> Valor de gastos en educacion por año: </label>
+            <input type="number" name="education_expenses" id="annual_education_expenses" required oninput="validarCampos()">
+
+            <div class="buttons">
+                <input type="submit" value="Calcular" onclick="setFormAction('/result_tax')">
+                <input type="reset" value="Limpiar">
+                <button onclick="abrirDialogo()">Guardar</button>
+
+                <dialog id="miDialogo">
+                  <h2>Título del Popup</h2>
+                  <p>Contenido del popup...</p>
+                  <button onclick="cerrarDialogo()">Cerrar</button>
+                </dialog>
+              
+                <script>
+                  function abrirDialogo() {
+                    document.getElementById('miDialogo').showModal();
+                  }
+              
+                  function cerrarDialogo() {
+                    document.getElementById('miDialogo').close();
+                  }
+                </script>
+
+            </div>
+        </form>
+
+        <form action="/result_tax">
+            <h2>Buscar por Cédula</h2>
+            <label for="cedula">Cédula / Documento de Identidad: </label>
+            <input type="number" name="cedula" id="DNI" required>
+            <div class="buttons">
+                <input type="submit" value="Buscar">
+            </div>
+        </form>
+
+    </section>
+</body>
+</html>
