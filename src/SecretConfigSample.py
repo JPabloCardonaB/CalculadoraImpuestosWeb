@@ -3,8 +3,8 @@ datos que aparecen en tu Base de datos en Neon y modificar el nombre(El Paso a p
 
 # Do not expose your Neon credentials to the browser
 
-PGHOST='ep-black-field-a5bqjxil.us-east-2.aws.neon.tech'
-PGDATABASE='CalculadoraImpuestos'
-PGUSER='Jp'
-PGPASSWORD='r9J4iHmovlfd'
-PGPORT= 5432 
+PGHOST=''
+PGDATABASE=''
+PGUSER=''
+PGPASSWORD=''
+PGPORT= 5432 #por defecto su puerto es 5432, pero puede llegar a variar

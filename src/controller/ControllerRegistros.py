@@ -4,7 +4,7 @@ sys.path.append("src")
 from model.TaxLogic import TaxInformation
 
 import psycopg2
-import SecretConfig
+import SecretConfigSample
 
 class ErrorNotFound( Exception ):
     """ Excepcion que indica que una fila buscada no fue encontrada"""
@@ -13,11 +13,11 @@ class ErrorNotFound( Exception ):
 def GetCursor():
     """Crea la conexion a la base de datos y retorna un cursor para ejecutar instrucciones."""
 
-    DATABASE = SecretConfig.PGDATABASE
-    USER = SecretConfig.PGUSER
-    PASSWORD = SecretConfig.PGPASSWORD
-    HOST = SecretConfig.PGHOST
-    PORT = SecretConfig.PGPORT
+    DATABASE = SecretConfigSample.PGDATABASE
+    USER = SecretConfigSample.PGUSER
+    PASSWORD = SecretConfigSample.PGPASSWORD
+    HOST = SecretConfigSample.PGHOST
+    PORT = SecretConfigSample.PGPORT
 
     connection = psycopg2.connect(database=DATABASE, user=USER, password=PASSWORD, host=HOST, port=PORT)
 
