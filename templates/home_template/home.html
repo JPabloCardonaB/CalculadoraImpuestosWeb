@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles_home.css') }}">
 
     <script>
-        // Función para verificar si todos los campos están llenos
+        // Función para verificar si todos los campos del primer formulario están llenos
         function validarCampos() {
-            var campos = document.querySelectorAll('input[type="number"]');
+            var campos = document.querySelectorAll('#formIngresarDatos input[type="number"]');
             var botonGuardar = document.getElementById('guardarButton');
 
             var todosLlenos = true;
@@ -25,50 +25,34 @@
 
         // Añadir el evento 'DOMContentLoaded' para asegurar que el DOM esté completamente cargado antes de añadir los event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            var campos = document.querySelectorAll('input[type="number"]');
+            var campos = document.querySelectorAll('#formIngresarDatos input[type="number"]');
             campos.forEach(function(campo) {
                 campo.addEventListener('input', validarCampos);
             });
         });
 
-        function obtenerValores() {
-            // Obtenemos los valores de cada input por su id
-            const cedula = document.getElementById('DNI').value;
-            const salario = document.getElementById('annual_labor_income').value;
-            const salarioGravable = document.getElementById('annual_graval_salary').value;
-            const salarioNoGravable = document.getElementById('annual_no_graval_salary').value;
-            const retencionFuente = document.getElementById('annual_withholding_tax').value;
-            const pagoHipotecario = document.getElementById('annual_mortgage_loan_payment').value;
-            const donaciones = document.getElementById('annual_donations').value;
-            const gastosEducacion = document.getElementById('annual_education_expenses').value;
-
-            // Creamos un objeto con los valores obtenidos
-            const valores = {
-                cedula,
-                salario,
-                salarioGravable,
-                salarioNoGravable,
-                retencionFuente,
-                pagoHipotecario,
-                donaciones,
-                gastosEducacion
-            };
-
-            // Mostrar los valores en la consola (puedes cambiar esto para hacer otra cosa con los valores)
-            console.log(valores);
-
-            return valores;
-        }
-
+        // Abrir el popup del boton guardar
         function abrirDialogoGuardar(event) {
             event.preventDefault();  // Prevenir el comportamiento predeterminado del botón
-            const valores_obtenidos = obtenerValores()
             document.getElementById('PopupGuardar').showModal();
         }
       
+        // Cerrar el Popup de boton guardar
         function cerrarDialogoGuardar() {
             document.getElementById('PopupGuardar').close();
         }
+
+        // Agregar un parametro si yo estoy calculando guardado el impuesto
+        function setSaveTax(value) {
+            document.getElementById('save_tax_param').value = value;
+        }
+
+        // Funcion para ejecutar diferentes rutas dependiendo del boton
+        function setFormAction(action) {
+            var form = document.getElementById('formBuscarEliminar');
+            form.action = action;
+        }
+
     </script>
 </head>
 <body>
@@ -81,37 +65,41 @@
     </header>
 
     <section>
-        <form action="/result_tax">
+        <!-- Form para obtener los datos de la declaracion de impuesto y guardarlo -->
+
+        <form id="formIngresarDatos" action="/result_tax">
             <h2>Ingrese los datos</h2>
 
             <label for="cedula">Cédula / Documento de Identidad: </label>
-            <input type="number" name="cedula" id="DNI" required>
-
+            <input type="number" name="cedula" id="DNI" required value="{{ tax['cedula'] if tax else '' }}">
+    
             <label for="salario">Total de ingresos laborales por año: </label>
-            <input type="number" name="salary" id="annual_labor_income" required>
-
+            <input type="number" name="salary" id="annual_labor_income" required value="{{ tax['salario'] if tax else '' }}">
+    
             <label for="salario_graval"> Total de otros ingresos gravables por año: </label>
-            <input type="number" name="graval_salary" id="annual_graval_salary" required>
-
+            <input type="number" name="graval_salary" id="annual_graval_salary" required value="{{ tax['salarioGravable'] if tax else '' }}">
+    
             <label for="salario_no_graval"> Total de otros ingresos no gravables por año: </label>
-            <input type="number" name="no_graval_salary" id="annual_no_graval_salary" required>
-
+            <input type="number" name="no_graval_salary" id="annual_no_graval_salary" required value="{{ tax['salarioNoGravable'] if tax else '' }}">
+    
             <label for="Withholding tax"> Valor de retención en la fuente por año: </label>
-            <input type="number" name="withholding_tax" id="annual_withholding_tax" required>
-
+            <input type="number" name="withholding_tax" id="annual_withholding_tax" required value="{{ tax['retencionFuente']if tax else '' }}">
+    
             <label for="mortgage loan payment"> Valor de pago de crédito hipotecario por año: </label>
-            <input type="number" name="mortgage_loan_payment" id="annual_mortgage_loan_payment" required>
-
+            <input type="number" name="mortgage_loan_payment" id="annual_mortgage_loan_payment" required value="{{ tax['pagoHipotecario'] if tax else '' }}">
+    
             <label for="donations"> Valor de donaciones por año: </label>
-            <input type="number" name="donations" id="annual_donations" required>
-
+            <input type="number" name="donations" id="annual_donations" required value="{{ tax['donaciones'] if tax else '' }}">
+    
             <label for="education expenses"> Valor de gastos en educacion por año: </label>
-            <input type="number" name="education_expenses" id="annual_education_expenses" required>
+            <input type="number" name="education_expenses" id="annual_education_expenses" required value="{{ tax['gastosEducacion'] if tax else '' }}">
+
+            <input type="hidden" name="save_tax" id="save_tax_param">
 
             <div class="buttons">
-                <input type="submit" value="Calcular">
-                <input type="reset" value="Limpiar">
-                <button id="guardarButton" onclick="abrirDialogoGuardar(event)" disabled>Guardar</button>
+                <input type="submit" value="Calcular" onclick="setSaveTax(false)">
+                <input type="reset" value="Limpiar" type="reset">
+                <button id="guardarButton" onclick="setSaveTax(true); abrirDialogoGuardar(event)" disabled>Guardar y Calcular</button>
 
                 <dialog id="PopupGuardar">
                     <h2>Guardado Exitoso</h2>
@@ -121,16 +109,19 @@
             </div>
         </form>
 
-        <form action="/result_tax">
+        <!-- Form para obtener la cedula de la persona y disparar el boton Buscar y Eliminar -->
+        <form id="formBuscarEliminar">
             <h2>Buscar por Cédula</h2>
             <label for="cedula">Cédula / Documento de Identidad: </label>
-            <input type="number" name="cedula" id="DNI" required>
+            <input type="number" name="cedula" id="DNIBuscarEliminar" required>
             <div class="buttons">
-                <input type="submit" value="Buscar">
-
-                <input type="submit" value="Eliminar">
+                <button type="submit" onclick="setFormAction('/result_research')">Buscar</button>
+                <button type="submit" onclick="setFormAction('/delete_cedula')">Eliminar</button>
             </div>
-            
         </form>
-        
+
     </section>
+    
+</body>
+</html>
+

@@ -1,8 +1,9 @@
 # Todas las pruebas unitarias importan la biblioteca unittest
 import unittest
-
 # Las pruebas importan los modulos que hacen el trabajo
 import sys
+import psycopg2
+from psycopg2.errors import *
 sys.path.append("src")
 
 from model.TaxLogic import TaxInformation
@@ -91,23 +92,22 @@ class TaxesTest(unittest.TestCase):
 
         #Insertamos un nuevo usuario a la tabla
         UserTest = TaxInformation(id=1,
-                                  total_labor_income_per_year=12,
-                                  other_taxable_income_per_year=12,
-                                  other_non_taxable_income_per_year=12,
-                                  source_retention_value_per_year=12,
-                                  mortgage_loan_payment_per_year=12,
-                                  donation_value_per_year=12,
-                                  educational_expenses_per_year=12)
+                                  total_labor_income_per_year=12453,
+                                  other_taxable_income_per_year=12233,
+                                  other_non_taxable_income_per_year=1442,
+                                  source_retention_value_per_year=112,
+                                  mortgage_loan_payment_per_year=122,
+                                  donation_value_per_year=1552,
+                                  educational_expenses_per_year=5562)
         ControllerRegistros.InsertRecord( UserTest )
 
         #Borrar registro
-        ControllerRegistros.DeleteRecord( 1 )
+        ControllerRegistros.DeleteRecord(321) 
 
         #valido
         with self.assertRaises(Exception):
-            ControllerRegistros.DeleteRecord( 1 )
+            ControllerRegistros.DeleteRecord(1)
     
-
     #Caso Normal Search
     def testSearch1( self ):
 

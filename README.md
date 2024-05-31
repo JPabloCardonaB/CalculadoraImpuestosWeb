@@ -65,31 +65,41 @@ Tener en cuenta: primeramente debe descargar el repositorio, para hacerlo ten en
 ### Ejecutar por consola 
 1. Abra la terminal en su computadora.
 2. En la terminal utilice el comando **cd** para entrar al escritorio; "cd Escritorio" (depende del nombre que tenga su escritorio o que ruta tiene para llegar a este).
-3. Utilice el mismo comando para entrar a la aplicación "cd Calculadora_Impuestos". 
+3. Utilice el mismo comando para entrar a la aplicación "cd CalculadoraImpuestosWeb". 
 4. Utilice el mismo comando para entrar a la carpeta src, que es donde estan organizadas las carpetas con los archivos necesarios para que la aplicación funcione "cd src". 
-5. Luego copie la ruta que lleva hasta el momento en la terminal y luego escriba el comando "set PYTHONPATH=ruta" aqui va la ruta que copio, ejemplo: set PYTHONPATH=C:\ruta\Escritorio\Calculadora_Impuestos\src
-6. Utilice el comando cd para entrar a la carpeta console que es donde se encuentra el menú "cd console".
+5. Luego copie la ruta que lleva hasta el momento en la terminal y luego escriba el comando "set PYTHONPATH=ruta" aqui va la ruta que copio, ejemplo: set PYTHONPATH=C:\ruta\Escritorio\CalculadoraImpuestosWeb\src
+6. Utilice el comando cd para entrar a la carpeta view que es donde se encuentra el menú "cd console".
 7. Despues utilice el comando "python TaxConsole.py".
 8. Aparecera un menú y usted sigue las instrucciones.
     
 ### Ejecutar pruebas e información de más
 1. Abra la terminal en su computadora.
 2. En la terminal utilice el comando **cd** para entrar al escritorio; "cd Escritorio" (depende del nombre que tenga su escritorio o que ruta tiene para llegar a este).
-3. Utilice el mismo comando para entrar a la aplicación "cd Calculadora_Impuestos". 
+3. Utilice el mismo comando para entrar a la aplicación "cd CalculadoraImpuestosWeb". 
 4. Utilice el mismo comando para entrar a la carpeta src, que es donde estan organizadas las carpetas con los archivos necesarios para que la aplicación funcione "cd src". 
-5. Luego copie la ruta que lleva hasta el momento en la terminal y luego escriba el comando "set PYTHONPATH=ruta" aqui va la ruta que copio, ejemplo: set PYTHONPATH=C:\ruta\Escritorio\Calculadora_Impuestos\src
+5. Luego copie la ruta que lleva hasta el momento en la terminal y luego escriba el comando "set PYTHONPATH=ruta" aqui va la ruta que copio, ejemplo: set PYTHONPATH=C:\ruta\Escritorio\CalculadoraImpuestosWeb\src
 6. Utilice el comando cd.. para salir de la carpeta src "cd.."
-7. Utilice el comando cd para entrar a la carpeta que desee, **test** que es donde se encuentran las pruebas unitarias de la logica: "cd test" o **testBD** que es donde se encuentran las pruebas unitarias de la Base de datos.
-8. Despues utilice el comando "python TaxTests.py" si estas en **test** o utiliza el comando "python TestsBD.py" si estas en **testBD**. 
+7. Utilice el comando cd para entrar a la carpeta tests
+8. Estando en la carpeta tests, puede dirigirse a la carpeta database_tests para ejecutar los tests de la base de datos ó
+   a la carpeta tax_tests para ejecutar los tests de la app
+9. Cuando haya decidido que tests ejecutar, puede usar el comando 'python TestsBD.py' ó 'python TaxTests.py' dependiendo del
+   caso.
 
 ### Ejecutar la interfaz grafica (Base de Datos)
 1. Abra la terminal en su computadora.
 2. En la terminal utilice el comando **cd** para entrar al escritorio; "cd Escritorio" (depende del nombre que tenga su escritorio o que ruta tiene para llegar a este).
-3. Utilice el mismo comando para entrar a la aplicación "cd Calculadora_Impuestos". 
+3. Utilice el mismo comando para entrar a la aplicación "cd CalculadoraImpuestosWeb". 
 4. Utilice el mismo comando para entrar a la carpeta src, que es donde estan organizadas las carpetas con los archivos necesarios para que la aplicación funcione "cd src". 
-5. Luego copie la ruta que lleva hasta el momento en la terminal y luego escriba el comando "set PYTHONPATH=ruta" aqui va la ruta que copio, ejemplo: set PYTHONPATH=C:\ruta\Escritorio\Calculadora_Impuestos\src
+5. Luego copie la ruta que lleva hasta el momento en la terminal y luego escriba el comando "set PYTHONPATH=ruta" aqui va la ruta que copio, ejemplo: set PYTHONPATH=C:\ruta\Escritorio\CalculadoraImpuestosWeb\src
 6. Utilice el comando cd para entrar a la carpeta GUI que es donde se encuentra la interfaz "cd GUI".
 7. Despues utilice el comando "python Tax_GUI.py". 
+
+### Ejecutar la interfaz web (Base de Datos)
+1. Abra la terminal en su computadora.
+2. En la terminal utilice el comando **cd** para entrar al escritorio; "cd Escritorio" (depende del nombre que tenga su escritorio o que ruta tiene para llegar a este).
+3. Utilice el mismo comando para entrar a la aplicación "cd CalculadoraImpuestosWeb".  
+4. Despues utilice el comando "python app.py" para ejecutar la aplicación.
+5. En la terminal le aparecerá una URL que le indicará la ruta que debe buscar en el navegador, para entrar a la interfaz web
 
 ## Tener en cuenta lo siguiente para que no lance errores:
 - No ingresar los ingresos laborales totales en el año
